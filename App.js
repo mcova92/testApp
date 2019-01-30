@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import MapView from 'react-native-maps'
 import Router from 'react-native-easy-router'
 import { 
@@ -7,11 +7,12 @@ import {
   View, 
   Button, 
   Image, 
-  Platform, 
-  ScrollView,
-  TouchableOpacity 
+  List,
+  ListItem,
 } from 'react-native'
 import Logo from './assets/tree.jpg';
+
+
 
 const First = ({ router }) => (
   
@@ -43,14 +44,23 @@ const First = ({ router }) => (
 const Second = ({ router, name }) => (
   <View style={{ backgroundColor: 'white', flex: 1 }}>
     <View style={styles.container}>
-      <Text>Second screen</Text>
-      <Text>Hello {name}!</Text>
-      <Button
-        title="Recycle near me"
-        style={styles.button}
-        onPress={() => router.push.Third()}
-        color="#FAE042"
-        />
+      <View style={styles.topContainer}>
+        <Text style={styles.h1}>Helpful Links</Text>
+      </View>
+      <View style={styles.middleContainer}>
+        <Text>Hello {name}!</Text>
+      </View>
+      <View style={styles.bottomContainer}>
+        <View style={styles.buttonContainer}>
+          <Button
+            title="Recycle near me"
+            style={styles.button}
+            onPress={() => router.push.Third()}
+            color="#FAE042"
+            />
+        </View>
+      </View>
+      
     </View>
     
   </View>
@@ -58,25 +68,23 @@ const Second = ({ router, name }) => (
 
 const Third = ({ router }) => (
   <View accessible={true} style={styles.mapcontainer}>
-    <MapView style={ styles.map }
+    <MapView
+      style={styles.map}
       initialRegion={{
-        latitude: 37.78825,
-        longitude: -122.4324,
-        latitudeDelta: 0.0922,
-        longitudeDelta: 0.0421
+        latitude: 35.593933,
+        longitude: -105.223897,
+        latitudeDelta: 1,
+        longitudeDelta: 1
       }}
-      />
-  
+      showsUserLocation={true}
+    />
+    <Button
+      title="Home"
+      style={styles.button}
+      onPress={() => router.push.First()}
+      color="#008F68"
+    />
   </View>
-
-  // <View style={{ backgroundColor: 'white', flex: 1 }}>
-  //   <View style={styles.container}>
-  //     <Text>Second screen</Text>
-
-  //     <Text onPress={() => router.pop()}>Go back</Text>
-  //   </View>
-
-  // </View>
 );
 
 const routes = { First, Second, Third }
